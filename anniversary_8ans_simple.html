@@ -1,0 +1,226 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .ann-wrap {
+    font-family: 'Montserrat', sans-serif;
+    background: #2d0a14;
+    color: #f5ede8;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  .petals {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .petal {
+    position: absolute;
+    bottom: -20px;
+    width: 8px; height: 10px;
+    background: rgba(212,175,100,0.2);
+    border-radius: 50% 0 50% 0;
+    animation: petalFall var(--pd) ease-in var(--pdelay) infinite;
+  }
+
+  @keyframes petalFall {
+    0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+    10% { opacity: 1; }
+    90% { opacity: 0.3; }
+    100% { opacity: 0; transform: translateY(-105vh) rotate(360deg) translateX(40px); }
+  }
+
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4rem 2rem 2rem;
+  }
+
+  .anni-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(6rem, 18vw, 11rem);
+    font-weight: 300;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1.5px #d4af64;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .anni-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
+    font-style: italic;
+    color: #d4af64;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-top: -0.5rem;
+    animation: fadeUp 1.2s ease 0.2s both;
+  }
+
+  .since {
+    margin-top: 1.5rem;
+    animation: fadeUp 1.2s ease 0.35s both;
+  }
+
+  .since-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #a07880;
+    margin-bottom: 0.4rem;
+  }
+
+  .since-date {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: #f5ede8;
+  }
+
+  .divider {
+    width: 80px;
+    height: 0.5px;
+    background: linear-gradient(to right, transparent, #d4af64, transparent);
+    margin: 2rem auto;
+  }
+
+  .photos-section {
+    position: relative;
+    z-index: 1;
+    padding: 0 1.5rem 2rem;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .photos-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    animation: fadeUp 1.2s ease 0.5s both;
+  }
+
+  .photo-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+
+  .photo-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(212,175,100,0.35);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .photo-card img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.9) contrast(1.05) saturate(0.85);
+    transition: transform 0.6s ease;
+  }
+
+  .photo-card:hover img { transform: scale(1.04); }
+
+  .message-section {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2.5rem 2rem 3rem;
+    max-width: 580px;
+    margin: 0 auto;
+    animation: fadeUp 1.2s ease 0.7s both;
+  }
+
+  .ornament {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: #d4af64;
+    opacity: 0.6;
+    letter-spacing: 0.5em;
+    margin-bottom: 1.5rem;
+  }
+
+  .message-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.25rem, 3.5vw, 1.7rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.9;
+    color: #e8d8cc;
+  }
+
+  .message-text .gold {
+    color: #d4af64;
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<div class="ann-wrap">
+
+  <div class="petals" id="petalsContainer"></div>
+
+  <div class="hero">
+    <div class="anni-number">8</div>
+    <div class="anni-label">Ans ensemble</div>
+    <div class="since">
+      <div class="since-label">Depuis le</div>
+      <div class="since-date">12 Juin 2018</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="photos-section">
+    <div class="photos-grid">
+      <div class="photo-card">
+        <img src="/mnt/user-data/uploads/5.jpeg" alt="Photo 1" />
+      </div>
+      <div class="photo-card">
+        <img src="/mnt/user-data/uploads/2.jpeg" alt="Photo 2" />
+      </div>
+    </div>
+  </div>
+
+  <div class="message-section">
+    <div class="ornament">— ♡ —</div>
+    <div class="message-text">
+      Depuis le premier jour,<br>
+      tu es devenu <span class="gold">ma maison</span>,<br>
+      mon refuge, mon sourire du matin.<br><br>
+      Huit ans à tes côtés<br>
+      et je tomberais encore<br>
+      <span class="gold">amoureux de toi,</span><br>
+      encore et encore.<br><br>
+      Merci d'exister dans ma vie. <span class="gold">♡</span>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const pc = document.getElementById('petalsContainer');
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.cssText = `left:${Math.random()*100}%;--pd:${9+Math.random()*12}s;--pdelay:${Math.random()*14}s`;
+    pc.appendChild(p);
+  }
+</script>
