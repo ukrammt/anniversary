@@ -1,18 +1,24 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>8 Ans Ensemble</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet"/>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400&display=swap');
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  .ann-wrap {
+  body {
     font-family: 'Montserrat', sans-serif;
     background: #2d0a14;
     color: #f5ede8;
     min-height: 100vh;
     overflow-x: hidden;
-    position: relative;
   }
 
+  /* ── PETALS ── */
   .petals {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -20,31 +26,38 @@
     z-index: 0;
     overflow: hidden;
   }
-
   .petal {
     position: absolute;
     bottom: -20px;
-    width: 8px;
-    height: 10px;
+    width: 8px; height: 10px;
     background: rgba(212,175,100,0.25);
     border-radius: 50% 0 50% 0;
     animation: petalFall var(--pd) ease-in var(--pdelay) infinite;
   }
-
   @keyframes petalFall {
-    0% { opacity: 0; transform: translateY(0) rotate(0deg); }
-    10% { opacity: 1; }
-    90% { opacity: 0.4; }
+    0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+    10%  { opacity: 1; }
+    90%  { opacity: 0.4; }
     100% { opacity: 0; transform: translateY(-105vh) rotate(360deg) translateX(40px); }
   }
 
-  .hero {
+  /* ── PAGES ── */
+  .page {
     position: relative;
     z-index: 1;
-    text-align: center;
-    padding: 4rem 2rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 2rem;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .page.hidden {
+    display: none;
   }
 
+  /* ── PAGE 1 ── */
   .anni-number {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(6rem, 18vw, 11rem);
@@ -56,7 +69,6 @@
     animation: fadeUp 1.2s ease both;
     text-shadow: 0 0 60px rgba(212,175,100,0.15);
   }
-
   .anni-label {
     font-family: 'Cormorant Garamond', serif;
     font-size: clamp(1.1rem, 3vw, 1.6rem);
@@ -68,41 +80,34 @@
     margin-top: -0.5rem;
     animation: fadeUp 1.2s ease 0.2s both;
   }
-
   .date-display {
     margin: 2.5rem auto 0;
     display: inline-block;
     animation: fadeUp 1.2s ease 0.4s both;
   }
-
   .date-row {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
   }
-
   .date-item {
     font-size: 0.6rem;
     letter-spacing: 0.3em;
     text-transform: uppercase;
     color: #a07880;
   }
-
   .date-val {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.3rem;
     font-weight: 300;
     color: #f5ede8;
   }
-
   .line-sep {
-    width: 1px;
-    height: 34px;
+    width: 1px; height: 34px;
     background: linear-gradient(to bottom, transparent, #d4af64, transparent);
     display: inline-block;
   }
-
   .today-badge {
     display: inline-block;
     margin-top: 1.5rem;
@@ -116,33 +121,134 @@
     font-weight: 600;
     animation: pulse 2s ease-in-out infinite;
   }
-
   @keyframes pulse {
     0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,100,0.4); }
-    50% { box-shadow: 0 0 0 12px rgba(212,175,100,0); }
+    50%       { box-shadow: 0 0 0 12px rgba(212,175,100,0); }
   }
 
-  .photos-section {
-    position: relative;
-    z-index: 1;
-    padding: 3rem 1.5rem 2rem;
-    max-width: 700px;
-    margin: 0 auto;
+  /* countdown */
+  .countdown-section {
+    margin-top: 2.5rem;
+    text-align: center;
+    animation: fadeUp 1.2s ease 0.6s both;
+  }
+  .countdown-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #a07880;
+    margin-bottom: 1.2rem;
+  }
+  .countdown-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .cd-box {
+    background: rgba(212,175,100,0.07);
+    border: 0.5px solid rgba(212,175,100,0.3);
+    border-radius: 2px;
+    padding: 0.8rem 1.2rem;
+    min-width: 70px;
+    text-align: center;
+  }
+  .cd-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 300;
+    color: #d4af64;
+    line-height: 1;
+  }
+  .cd-unit {
+    font-size: 0.55rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #a07880;
+    margin-top: 0.3rem;
+  }
+
+  /* enter button */
+  .enter-btn {
+    margin-top: 3rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    animation: fadeUp 1.2s ease 0.9s both;
+    padding: 0;
+    display: inline-block;
+  }
+  .enter-btn svg {
+    width: 64px; height: 64px;
+    stroke: #d4af64;
+    fill: none;
+    stroke-width: 1.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    opacity: 0.85;
+  }
+  .enter-btn:hover svg {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  .enter-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: #d4af64;
+    letter-spacing: 0.15em;
+    margin-top: 0.5rem;
+    opacity: 0.85;
+  }
+
+  /* ── PAGE 2 ── */
+  #page2 {
+    justify-content: flex-start;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .back-btn {
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    background: transparent;
+    border: none;
+    color: #a07880;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s;
+  }
+  .back-btn:hover { color: #d4af64; }
+  .back-btn svg {
+    width: 14px; height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .photos-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    animation: fadeUp 1.2s ease 0.6s both;
+    width: 100%;
+    max-width: 600px;
+    animation: fadeUp 0.9s ease 0.1s both;
   }
-
   .photo-card {
     position: relative;
     overflow: hidden;
     border-radius: 2px;
   }
-
   .photo-card::before {
     content: '';
     position: absolute;
@@ -152,7 +258,6 @@
     border-radius: 2px;
     pointer-events: none;
   }
-
   .photo-card img {
     width: 100%;
     aspect-ratio: 3/4;
@@ -161,9 +266,7 @@
     filter: sepia(10%) brightness(0.9) contrast(1.05) saturate(0.9);
     transition: transform 0.6s ease;
   }
-
   .photo-card:hover img { transform: scale(1.04); }
-
   .photo-overlay {
     position: absolute;
     bottom: 0; left: 0; right: 0;
@@ -171,7 +274,6 @@
     padding: 1.5rem 1rem 0.8rem;
     z-index: 1;
   }
-
   .photo-year {
     font-family: 'Cormorant Garamond', serif;
     font-size: 0.9rem;
@@ -181,15 +283,12 @@
   }
 
   .message-section {
-    position: relative;
-    z-index: 1;
     text-align: center;
-    padding: 2rem 2rem 1.5rem;
-    max-width: 600px;
-    margin: 0 auto;
-    animation: fadeUp 1.2s ease 0.8s both;
+    padding: 2.5rem 1rem 0;
+    max-width: 560px;
+    width: 100%;
+    animation: fadeUp 0.9s ease 0.25s both;
   }
-
   .ornament {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.8rem;
@@ -198,134 +297,52 @@
     letter-spacing: 0.5em;
     margin-bottom: 1rem;
   }
-
   .message-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.2rem, 3.5vw, 1.65rem);
+    font-size: clamp(1.15rem, 3.5vw, 1.6rem);
     font-weight: 300;
     font-style: italic;
-    line-height: 1.8;
+    line-height: 1.85;
     color: #e8d8cc;
   }
-
   .message-text span {
     color: #d4af64;
     font-style: normal;
     font-weight: 400;
   }
-
   .divider {
     width: 80px;
     height: 0.5px;
     background: linear-gradient(to right, transparent, #d4af64, transparent);
-    margin: 1.5rem auto;
-  }
-
-  .countdown-section {
-    position: relative;
-    z-index: 1;
-    padding: 1.5rem 1.5rem 3rem;
-    text-align: center;
-    animation: fadeUp 1.2s ease 1s both;
-  }
-
-  .countdown-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.4em;
-    text-transform: uppercase;
-    color: #a07880;
-    margin-bottom: 1.2rem;
-  }
-
-  .countdown-boxes {
-    display: flex;
-    justify-content: center;
-    gap: 0.75rem;
-    flex-wrap: wrap;
-  }
-
-  .cd-box {
-    background: rgba(212,175,100,0.07);
-    border: 0.5px solid rgba(212,175,100,0.3);
-    border-radius: 2px;
-    padding: 0.8rem 1.2rem;
-    min-width: 70px;
-  }
-
-  .cd-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.2rem;
-    font-weight: 300;
-    color: #d4af64;
-    line-height: 1;
-  }
-
-  .cd-unit {
-    font-size: 0.55rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #a07880;
-    margin-top: 0.3rem;
+    margin: 1.5rem auto 0;
   }
 
   @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 </style>
+</head>
+<body>
 
-<div class="ann-wrap">
+<div class="petals" id="petalsContainer"></div>
 
-  <div class="petals" id="petalsContainer"></div>
+<!-- PAGE 1 -->
+<div class="page" id="page1">
 
-  <div class="hero">
-    <div class="anni-number">8</div>
-    <div class="anni-label">Ans ensemble</div>
+  <div class="anni-number" id="anniNum">8</div>
+  <div class="anni-label">Ans ensemble</div>
 
-    <div class="date-display">
-      <div class="date-row">
-        <div class="line-sep"></div>
-        <div>
-          
-          <div class="date-item">Depuis</div>
-          <div class="date-val">12 Juin 2018</div>
-        </div>
-        <div class="line-sep"></div>
-        
+  <div class="date-display">
+    <div class="date-row">
+      <div class="line-sep"></div>
+      <div>
+        <div class="date-item">Depuis</div>
+        <div class="date-val">12 Juin 2018</div>
       </div>
-      <div id="todayBadgeWrap"></div>
+      <div class="line-sep"></div>
     </div>
-  </div>
-
-  <div class="photos-section">
-    <div class="photos-grid">
-      <div class="photo-card">
-        <img src="1.jpeg" alt="Photo 1" />
-        <div class="photo-overlay">
-          <div class="photo-year">Notre première photo ♡</div>
-        </div>
-      </div>
-      <div class="photo-card">
-        <img src="5.jpeg" alt="Photo 2" />
-        <div class="photo-overlay">
-          <div class="photo-year">Toujours ensemble ♡</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="message-section">
-    <div class="ornament">— ♡ —</div>
-    <div class="message-text" id="msgText">
-     Depuis le premier jour,
-     tu es devenu ma maison,<br>
-    mon refuge, mon sourire du matin. <br><br>
-      <span>Tu es mon chez-moi.</span><br><br>
-      Huit ans de rires, de regards,<br>
-      de routes partagées sous le même ciel.<br>
-      Kanbghik 9ad sema ♡.<br><br>
-    </div>
-    <div class="divider"></div>
+    <div id="todayBadgeWrap" style="text-align:center"></div>
   </div>
 
   <div class="countdown-section">
@@ -338,15 +355,76 @@
     </div>
   </div>
 
+  <button class="enter-btn" onclick="goToPage2()" aria-label="Ouvrir la lettre">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <rect x="6" y="16" width="52" height="36" rx="3"/>
+      <path d="M6 16 L32 36 L58 16"/>
+      <line x1="6" y1="52" x2="24" y2="34"/>
+      <line x1="58" y1="52" x2="40" y2="34"/>
+    </svg>
+    <div class="enter-label">Pour toi ♡</div>
+  </button>
+
+</div>
+
+<!-- PAGE 2 -->
+<div class="page hidden" id="page2">
+
+  <button class="back-btn" onclick="goToPage1()">
+    <svg viewBox="0 0 24 24"><path d="M4 12h16M11 5l-7 7 7 7"/></svg>
+    Retour
+  </button>
+
+  <div class="photos-grid">
+    <div class="photo-card">
+      <img src="1.jpeg" alt="Photo 1"/>
+      <div class="photo-overlay">
+        <div class="photo-year">Notre première photo ♡</div>
+      </div>
+    </div>
+    <div class="photo-card">
+      <img src="5.jpeg" alt="Photo 2"/>
+      <div class="photo-overlay">
+        <div class="photo-year">Toujours ensemble ♡</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="message-section">
+    <div class="ornament">— ♡ —</div>
+    <div class="message-text" id="msgText">
+      Depuis le premier jour,<br>
+      tu es devenu ma maison,<br>
+      mon refuge, mon sourire du matin.<br><br>
+      <span>Tu es mon chez-moi.</span><br><br>
+      Huit ans de rires, de regards,<br>
+      de routes partagées sous le même ciel.<br>
+      Kanbghik 9ad sema ♡.
+    </div>
+    <div class="divider"></div>
+  </div>
+
 </div>
 
 <script>
+  // petals
   const pc = document.getElementById('petalsContainer');
   for (let i = 0; i < 18; i++) {
     const p = document.createElement('div');
     p.className = 'petal';
     p.style.cssText = `left:${Math.random()*100}%;--pd:${9+Math.random()*12}s;--pdelay:${Math.random()*14}s`;
     pc.appendChild(p);
+  }
+
+  function goToPage2() {
+    document.getElementById('page1').classList.add('hidden');
+    document.getElementById('page2').classList.remove('hidden');
+    window.scrollTo(0, 0);
+  }
+  function goToPage1() {
+    document.getElementById('page2').classList.add('hidden');
+    document.getElementById('page1').classList.remove('hidden');
+    window.scrollTo(0, 0);
   }
 
   const now = new Date();
@@ -358,31 +436,32 @@
     badge.textContent = "✦ C'est aujourd'hui · " + now.getFullYear() + " ✦";
     document.getElementById('todayBadgeWrap').appendChild(badge);
 
+    document.getElementById('cdLabel').textContent = "✦ Joyeux anniversaire ✦";
+    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '♡');
+
     document.getElementById('msgText').innerHTML = `
       <span>C'est aujourd'hui !</span><br><br>
       ${now.getFullYear() - 2018} ans de bonheur, de complicité,<br>
       d'amour qui grandit chaque jour.<br><br>
       <span>Bonne anniversaire mon amour. ♡</span>
     `;
-
-    document.getElementById('cdLabel').textContent = "✦ Joyeux anniversaire ✦";
-    ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '♡');
   } else {
     function updateCD() {
       const target = new Date('2026-06-12T00:00:00');
-      const n = new Date();
-      const diff = target - n;
+      const diff = target - new Date();
       if (diff <= 0) {
         document.getElementById('cdLabel').textContent = "✦ Joyeux anniversaire ✦";
         ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '♡');
         return;
       }
-      document.getElementById('cd-days').textContent = String(Math.floor(diff/86400000)).padStart(2,'0');
+      document.getElementById('cd-days').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
       document.getElementById('cd-hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
-      document.getElementById('cd-mins').textContent = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
-      document.getElementById('cd-secs').textContent = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
+      document.getElementById('cd-mins').textContent  = String(Math.floor((diff%3600000)/60000)).padStart(2,'0');
+      document.getElementById('cd-secs').textContent  = String(Math.floor((diff%60000)/1000)).padStart(2,'0');
     }
     updateCD();
     setInterval(updateCD, 1000);
   }
 </script>
+</body>
+</html>
